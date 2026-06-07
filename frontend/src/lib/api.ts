@@ -79,4 +79,41 @@ export const documentApi = {
   reprocess: (id: string) => api.post<Document>(`/api/documents/${id}/reprocess`).then((r) => r.data),
 };
 
+export interface Chat {
+  id: string;
+  user_id: string;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface Message {
+  id: string;
+  chat_id: string;
+  role: string;
+  content: string;
+  sources: { sources: Array<{ doc_title: string; page_num: number | null; text_snippet: string }> } | null;
+  feedback: boolean | null;
+  created_at: string;
+}
+
+export interface ChatDetail extends Chat {
+  messages: Message[];
+}
+
+export interface SendMessageResponse {
+  message: Message;
+  answer: Message;
+}
+
+export const chatApi = {
+  list: () => api.get<Chat[]>("/api/chats/").then((r) => r.data),
+  create: () => api.post<Chat>("/api/chats/").then((r) => r.data),
+  get: (id: string) => api.get<ChatDetail>(`/api/chats/${id}`).then((r) => r.data),
+  sendMessage: (chatId: string, content: string) =>
+    api.post<SendMessageResponse>(`/api/chats/${chatId}/messages`, { content }).then((r) => r.data),
+  submitFeedback: (messageId: string, feedback: boolean) =>
+    api.post(`/api/chats/messages/${messageId}/feedback`, { feedback }).then((r) => r.data),
+};
+
 export default api;
