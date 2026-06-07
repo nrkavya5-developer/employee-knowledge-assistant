@@ -110,6 +110,7 @@ export const chatApi = {
   list: () => api.get<Chat[]>("/api/chats/").then((r) => r.data),
   create: () => api.post<Chat>("/api/chats/").then((r) => r.data),
   get: (id: string) => api.get<ChatDetail>(`/api/chats/${id}`).then((r) => r.data),
+  delete: (id: string) => api.delete(`/api/chats/${id}`).then((r) => r.data),
   sendMessage: (chatId: string, content: string) =>
     api.post<SendMessageResponse>(`/api/chats/${chatId}/messages`, { content }).then((r) => r.data),
   submitFeedback: (messageId: string, feedback: boolean) =>

@@ -105,6 +105,20 @@ def send_message(
     )
 
 
+@router.delete("/{chat_id}")
+def delete_chat(
+    chat_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+) -> dict:
+    chat = db.query(Chat).filter(Chat.id == chat_id, Chat.user_id == current_user.id).first()
+    if not chat:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Chat not found")
+    db.delete(chat)
+    db.commit()
+    return {"status": "deleted"}
+
+
 @router.post("/messages/{message_id}/feedback")
 def submit_feedback(
     message_id: str,
