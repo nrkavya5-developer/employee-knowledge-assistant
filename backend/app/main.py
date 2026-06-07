@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api.deps import get_current_user, require_admin
+from app.api.auth import router as auth_router
 from app.models.user import User
 
 app = FastAPI(title=settings.APP_NAME)
@@ -15,15 +16,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth_router)
+
 
 @app.get("/api/health")
 def health_check():
     return {"status": "ok", "app": settings.APP_NAME}
-
-
-@app.get("/api/me")
-def get_me(current_user: User = Depends(get_current_user)):
-    return {"id": current_user.id, "email": current_user.email, "role": current_user.role}
 
 
 @app.get("/api/admin/check")
