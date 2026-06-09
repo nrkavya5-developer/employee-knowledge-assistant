@@ -611,7 +611,6 @@ Authorization: Bearer <token>
 │   ├── start-dev.bat
 │   └── init.bat
 ├── sample-docs/                 # Demo documents for upload
-├── screenshots/                 # Application screenshots
 ├── docker-compose.yml
 ├── Dockerfile
 ├── .gitignore
