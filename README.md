@@ -2,8 +2,6 @@
 
 > AI-powered internal knowledge base that helps employees find information from company documents using natural language questions.
 
-![Dashboard](screenshots/chat.png)
-
 ## Features
 
 | Feature | Description |
@@ -97,16 +95,6 @@ curl http://localhost/api/health
 | App | http://localhost |
 | API | http://localhost/api |
 | Docs | http://localhost/api/docs |
-
-## Screenshots
-
-| Page | Preview |
-|------|---------|
-| Login | ![Login](screenshots/login.png) |
-| Chat Interface | ![Chat](screenshots/chat.png) |
-| Admin Documents | ![Documents](screenshots/admin-documents.png) |
-| Admin Analytics | ![Analytics](screenshots/admin-analytics.png) |
-| API Documentation | ![API Docs](screenshots/api-docs.png) |
 
 ## API Overview
 
